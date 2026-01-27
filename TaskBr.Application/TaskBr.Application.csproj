@@ -7,7 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="UseCases\" />
+    <Folder Include="UseCases\Tasks\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TaskBr.Communication\TaskBr.Communication.csproj" />
   </ItemGroup>
 
 </Project>
