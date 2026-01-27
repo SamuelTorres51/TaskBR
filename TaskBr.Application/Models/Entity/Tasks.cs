@@ -1,4 +1,4 @@
-﻿using TaskBr.Application.Models.Enums;
+﻿using TaskBr.Communication.Enums;
 
 namespace TaskBr.Application.Models.Entity;
 

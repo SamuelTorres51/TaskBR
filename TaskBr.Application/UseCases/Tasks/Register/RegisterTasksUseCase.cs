@@ -1,12 +1,14 @@
-﻿using TaskBr.Communication.Requests;
+﻿using TaskBr.Application.Models.Entity;
+using TaskBr.Application.Repositories;
+using TaskBr.Communication.Enums;
+using TaskBr.Communication.Requests;
 using TaskBr.Communication.Responses;
-using TaskBr.Application.Models.Enums;
-using TaskBr.Application.Models.Entity;
 
 namespace TaskBr.Application.UseCases.Register;
 
 public class RegisterTasksUseCase {
-    public (ResponseRegistedTaskJson? Success, ResponseErrorsTaskJson? Errors) Execute(RequestRegisterTaskJson request) {
+
+    public (ResponseRegistedTaskJson? Success, ResponseErrorsTaskJson? Errors) Execute(RequestRegisterTaskJson request, TasksRepository repository) {
         var errors = new ResponseErrorsTaskJson();
 
         if (string.IsNullOrWhiteSpace(request.Name)) {
@@ -35,6 +37,21 @@ public class RegisterTasksUseCase {
             return (null, errors);
         }
 
-        var task = new Tasks()
+        var task = new Tasks();
+        task.Id = Guid.NewGuid();
+        task.Name = request.Name;
+        task.Description = request.Description;
+        task.Priority = request.Priority;
+        task.DueDate = request.DueDate;
+        task.Status = request.Status;
+
+        repository.Add(task);
+
+        var response = new ResponseRegistedTaskJson() {
+            Id = task.Id,
+            Name = task.Name
+        };
+
+        return (response, null);
     }
 }
