@@ -10,4 +10,8 @@
     <ProjectReference Include="..\TaskBr.Communication\TaskBr.Communication.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="UseCases\" />
+  </ItemGroup>
+
 </Project>
