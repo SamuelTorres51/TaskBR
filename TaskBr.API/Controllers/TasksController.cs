@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TaskBr.Communication.Requests;
 using TaskBr.Communication.Responses;
+using TaskBr.Application.Repositories;
 
 namespace TaskBr.API.Controllers;
 
@@ -8,6 +9,14 @@ namespace TaskBr.API.Controllers;
 [ApiController]
 
 public class TasksController : ControllerBase {
+
+    private readonly TasksRepository _repository;
+
+    public TasksController(TasksRepository repository) {
+        _repository = repository;
+    }
+
+
     // POST Criar task
     [HttpPost]
     [ProducesResponseType(typeof(ResponseRegistedTaskJson), StatusCodes.Status201Created)]

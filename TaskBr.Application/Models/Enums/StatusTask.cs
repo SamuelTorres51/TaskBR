@@ -1,4 +1,4 @@
-﻿namespace TaskBr.Application.Enums;
+﻿namespace TaskBr.Application.Models.Enums;
 
 public enum StatusTask {
     Completed = 0,

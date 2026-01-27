@@ -1,6 +1,6 @@
-﻿using TaskBr.Application.Enums;
+﻿using TaskBr.Application.Models.Enums;
 
-namespace TaskBr.Application.Entity;
+namespace TaskBr.Application.Models.Entity;
 
 public class Tasks {
     public Guid Id { get; set; }

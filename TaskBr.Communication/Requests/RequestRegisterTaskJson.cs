@@ -1,4 +1,4 @@
-﻿using TaskBr.Application.Enums;
+﻿using TaskBr.Communication.Enums;
 
 namespace TaskBr.Communication.Requests;
 
