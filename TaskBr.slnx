@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="TaskBr.API/TaskBr.API.csproj" />
+  <Project Path="TaskBr.Application/TaskBr.Application.csproj" />
+  <Project Path="TaskBr.Communication/TaskBr.Communication.csproj" />
+</Solution>
