@@ -68,7 +68,7 @@ public class TasksController : ControllerBase {
         return Ok(response);
     }
 
-
+    // Put alterar task por id
     [HttpPut]
     [Route("{id}")]
     [ProducesResponseType(typeof(ResponseUpdatedTaskJson), StatusCodes.Status200OK)]
@@ -90,6 +90,7 @@ public class TasksController : ControllerBase {
     }
 
 
+    //Delete uma task
     [HttpDelete]
     [Route("{id}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
