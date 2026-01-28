@@ -6,6 +6,7 @@ using TaskBr.Application.UseCases.Register;
 using TaskBr.Application.UseCases.Tasks.GetAll;
 using TaskBr.Application.UseCases.Tasks.GetById;
 using TaskBr.Application.UseCases.Tasks.Update;
+using TaskBr.Application.UseCases.Tasks.Delete;
 
 namespace TaskBr.API.Controllers;
 
@@ -88,4 +89,18 @@ public class TasksController : ControllerBase {
         return Ok(response.Success);
     }
 
+
+    [HttpDelete]
+    [Route("{id}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+
+    public IActionResult DeleteTasks([FromRoute] Guid id) {
+        var UseCase = new DeleteTasksUseCase();
+        var response = UseCase.Execute(id, _repository);
+        if (!response) {
+            return NotFound();
+        }
+        return NoContent();
+    }
 }
