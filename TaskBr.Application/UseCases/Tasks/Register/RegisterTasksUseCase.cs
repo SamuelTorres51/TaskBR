@@ -1,5 +1,4 @@
-﻿using TaskBr.Application.Models.Entity;
-using TaskBr.Application.Repositories;
+﻿using TaskBr.Application.Repositories;
 using TaskBr.Communication.Enums;
 using TaskBr.Communication.Requests;
 using TaskBr.Communication.Responses;
@@ -18,7 +17,7 @@ public class RegisterTasksUseCase {
         }
 
         if (string.IsNullOrWhiteSpace(request.Description)) {
-            errors.Errors.Add("O nome da tarefa é obrigatório");
+            errors.Errors.Add("O nome da descrição é obrigatório");
         }
 
         if(!Enum.IsDefined(typeof(PriorityTask), request.Priority)) {
@@ -37,7 +36,7 @@ public class RegisterTasksUseCase {
             return (null, errors);
         }
 
-        var task = new Tasks();
+        var task = new Models.Entity.Tasks();
         task.Id = Guid.NewGuid();
         task.Name = request.Name;
         task.Description = request.Description;

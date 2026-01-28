@@ -4,7 +4,7 @@ using TaskBr.Application.Repositories;
 namespace TaskBr.Application.UseCases.Tasks.GetAll;
 
 public class GetAllTasksUseCase {
-    public (ResponseErrorsTaskJson? Errors, ResponseTasksJson? Success) Execute(TasksRepository repository) {
+    public ResponseTasksJson Execute(TasksRepository repository) {
         var tasks = repository.GetAll();
         var response = new ResponseTasksJson {
             Tasks = tasks.Select(task => new ResponseShortTasksJson {
@@ -14,6 +14,6 @@ public class GetAllTasksUseCase {
                 Status = task.Status
             }).ToList()
         };
-        return (null, response);
+        return response;
     }
 }

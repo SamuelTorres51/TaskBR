@@ -3,6 +3,7 @@ using TaskBr.Communication.Requests;
 using TaskBr.Communication.Responses;
 using TaskBr.Application.Repositories;
 using TaskBr.Application.UseCases.Register;
+using TaskBr.Application.UseCases.Tasks.GetAll;
 
 namespace TaskBr.API.Controllers;
 
@@ -34,5 +35,18 @@ public class TasksController : ControllerBase {
     }
 
     [HttpGet]
+    [ProducesResponseType(typeof(ResponseTasksJson), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    public IActionResult GetAllTasks() {
+        var UseCase = new GetAllTasksUseCase();
+        var response = UseCase.Execute(_repository);
+        
 
+        if (response.Tasks.Count == 0) {
+            return NoContent();
+        }
+        
+
+        return Ok(response);
+    }
 }
