@@ -32,4 +32,7 @@ public class TasksController : ControllerBase {
 
         return Created(string.Empty, result.Success);
     }
+
+    [HttpGet]
+
 }
