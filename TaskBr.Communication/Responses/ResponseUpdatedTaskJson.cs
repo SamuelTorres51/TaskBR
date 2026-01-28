@@ -1,0 +1,6 @@
+﻿namespace TaskBr.Communication.Responses;
+
+public class ResponseUpdatedTaskJson {
+    public Guid Id { get; set; }
+    public string Name { get; set; } = string.Empty;
+}

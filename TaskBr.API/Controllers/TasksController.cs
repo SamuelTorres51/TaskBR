@@ -5,6 +5,7 @@ using TaskBr.Application.Repositories;
 using TaskBr.Application.UseCases.Register;
 using TaskBr.Application.UseCases.Tasks.GetAll;
 using TaskBr.Application.UseCases.Tasks.GetById;
+using TaskBr.Application.UseCases.Tasks.Update;
 
 namespace TaskBr.API.Controllers;
 
@@ -51,11 +52,12 @@ public class TasksController : ControllerBase {
         return Ok(response);
     }
 
+    // Get Obter task por id
     [HttpGet]
     [Route("{id}")]
     [ProducesResponseType(typeof(ResponseTaskJson), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public IActionResult GetByIdTasks(Guid id) {
+    public IActionResult GetByIdTasks([FromRoute] Guid id) {
         var UseCase = new GetByIdTasksUseCase();
         var response = UseCase.Execute(id, _repository);
 
@@ -64,4 +66,26 @@ public class TasksController : ControllerBase {
 
         return Ok(response);
     }
+
+
+    [HttpPut]
+    [Route("{id}")]
+    [ProducesResponseType(typeof(ResponseUpdatedTaskJson), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(typeof(ResponseErrorsTaskJson), StatusCodes.Status400BadRequest)]
+    public IActionResult UpdateTask([FromRoute] Guid id, [FromBody] RequestUpdateTaskJson request) {
+        var UseCase = new UpdateTasksUseCase();
+        var response = UseCase.Execute(id, request, _repository);
+
+        if(response.Success == null && response.Errors == null) {
+            return NotFound();
+        }
+
+        if (response.Errors is not null) {
+            return BadRequest(response.Errors);
+        }
+
+        return Ok(response.Success);
+    }
+
 }
